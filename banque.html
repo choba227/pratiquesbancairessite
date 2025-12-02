@@ -2963,16 +2963,23 @@
       }
 
       // Gestion des clics sur les images de banque
-      // Utiliser la phase de capture pour intercepter les clics avant le gestionnaire de popup
+      // Seules les banques affichées au centre de l'iPad (unique-image-3 dans .unique-ipad) ouvrent un flipbook
       document.addEventListener('click', function(e) {
-        const imageLink = e.target.closest('.unique-image[data-bank]');
-        if (imageLink) {
+        const imageLink = e.target.closest('.unique-ipad .unique-image[data-bank]');
+        if (!imageLink) return;
+
+        // Ne permettre le clic que si l'image est au centre de l'iPad
+        if (!imageLink.classList.contains('unique-image-3')) {
           e.preventDefault();
           e.stopPropagation();
-          const bankId = imageLink.getAttribute('data-bank');
-          if (bankId) {
-            openFlipbook(bankId);
-          }
+          return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+        const bankId = imageLink.getAttribute('data-bank');
+        if (bankId) {
+          openFlipbook(bankId);
         }
       }, true); // true = phase de capture (s'exécute avant la phase de bubbling)
 
