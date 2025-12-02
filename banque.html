@@ -4272,12 +4272,15 @@
       }
     })();
     
-    // Initialize AOS
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
+    // Initialize AOS (allégé pour de meilleures performances)
+    if (window.AOS && typeof AOS.init === 'function') {
+      AOS.init({
+        duration: 500,   // animations plus courtes
+        once: true,      // une seule fois par élément
+        offset: 80,      // déclenchement un peu plus tôt
+        easing: 'ease-out'
+      });
+    }
     
     // Pagination verticale
     const paginationItems = document.querySelectorAll('.pagination li');
