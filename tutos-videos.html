@@ -797,7 +797,12 @@
   </footer>
 
   <script>
-    AOS.init({ duration: 1000, once: true, offset: 100 });
+    // AOS allégé
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.AOS && typeof AOS.init === 'function') {
+        AOS.init({ duration: 500, once: true, offset: 80, easing: 'ease-out' });
+      }
+    });
 
     // Diaporama pour le hero Tutoriels Vidéo
     (function() {

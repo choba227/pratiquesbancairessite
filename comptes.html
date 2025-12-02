@@ -2302,15 +2302,18 @@
   </footer>
 
   <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
-
-    // Pagination verticale
+    // AOS allégé + Pagination verticale
     document.addEventListener('DOMContentLoaded', function () {
+      if (window.AOS && typeof AOS.init === 'function') {
+        AOS.init({
+          duration: 500,
+          once: true,
+          offset: 80,
+          easing: 'ease-out'
+        });
+      }
+
+      // Pagination verticale
       const paginationItems = document.querySelectorAll('.pagination li');
       const sections = document.querySelectorAll('section[id]');
 
