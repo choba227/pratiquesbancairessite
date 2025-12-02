@@ -642,7 +642,7 @@
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center flex-shrink-0">
           <a href="banque.html" class="flex items-center">
-            <img class="h-10 w-auto" src="https://huggingface.co/spaces/arhaniger/afrique-en-poche/resolve/main/images/logo%20afrique%20en%20poche%20fond%20blanc.png" alt="Logo">
+            <img class="h-10 w-auto" src="https://huggingface.co/spaces/arhaniger/afrique-en-poche/resolve/main/images/logo%20afrique%20en%20poche%20fond%20blanc.png" alt="Logo" loading="lazy">
             <span class="ml-3 text-xl font-bold">Pratiques Bancaires</span>
           </a>
         </div>
@@ -1363,7 +1363,7 @@
       // Si une image de bannière est disponible, l'afficher
       const bannerImageHTML = company.bannerImage 
         ? `<div class="banner-image-container" style="width: calc(100% + 48px); height: 200px; overflow: hidden; border-radius: 12px 12px 0 0; margin: -24px -24px 24px -24px; position: relative;">
-             <img src="${company.bannerImage}" alt="${company.title || company.name}" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+             <img src="${company.bannerImage}" alt="${company.title || company.name}" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
            </div>`
         : `<div class="icon">${company.icon}</div>`;
       
