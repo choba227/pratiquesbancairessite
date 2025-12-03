@@ -1678,6 +1678,33 @@
     </a>
   </section>
 
+  <!-- Modal vidéo Leçon 1 : Introduction aux Comptes Bancaires -->
+  <div id="lesson1VideoModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden items-center justify-center">
+    <div class="relative w-full h-full flex items-center justify-center p-4">
+      <!-- Bouton fermer -->
+      <button id="closeLesson1VideoBtn" class="absolute top-4 right-4 text-white hover:text-blue-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-3 hover:bg-opacity-70">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      
+      <!-- Container vidéo -->
+      <div class="relative w-full max-w-6xl max-h-[90vh] bg-black rounded-lg overflow-hidden shadow-2xl">
+        <video 
+          id="lesson1VideoPlayer" 
+          class="w-full h-auto max-h-[90vh]"
+          style="object-fit: contain;"
+          controls
+          playsinline
+          preload="auto"
+        >
+          <source src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d&#39;un compte bancaire.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+      </div>
+    </div>
+  </div>
+
   <!-- Carousel des leçons vidéo -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -2367,9 +2394,65 @@
           ticking = true;
         }
       });
+
+      // Gestion de la carte vidéo "Leçon 1" pour cohérence avec la page banque.html
+      const emefaCard = document.querySelector('.emefa-hover-card');
+      const emefaPlayButton = emefaCard ? emefaCard.querySelector('.emefa-play-button') : null;
+      const lesson1Modal = document.getElementById('lesson1VideoModal');
+      const lesson1Video = document.getElementById('lesson1VideoPlayer');
+      const closeLesson1Btn = document.getElementById('closeLesson1VideoBtn');
+
+      function openLesson1Modal() {
+        if (!lesson1Modal || !lesson1Video) return;
+        lesson1Modal.classList.remove('hidden');
+        lesson1Modal.style.display = 'flex';
+        lesson1Video.currentTime = 0;
+        const playPromise = lesson1Video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
+        }
+      }
+
+      function closeLesson1Modal() {
+        if (!lesson1Modal || !lesson1Video) return;
+        lesson1Video.pause();
+        lesson1Modal.classList.add('hidden');
+        lesson1Modal.style.display = 'none';
+      }
+
+      // Clic sur le bouton play de la carte : ouvrir la vidéo ici, sans quitter la page
+      if (emefaPlayButton) {
+        emefaPlayButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openLesson1Modal();
+        });
+      }
+
+      // Fermer le modal avec le bouton
+      if (closeLesson1Btn) {
+        closeLesson1Btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeLesson1Modal();
+        });
+      }
+
+      // Fermer en cliquant en dehors du contenu vidéo
+      if (lesson1Modal) {
+        lesson1Modal.addEventListener('click', function(e) {
+          if (e.target === lesson1Modal) {
+            closeLesson1Modal();
+          }
+        });
+      }
+
+      // Fermer avec la touche Échap
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lesson1Modal && !lesson1Modal.classList.contains('hidden')) {
+          closeLesson1Modal();
+        }
+      });
     });
-    
-    // Pas de gestion vidéo nécessaire car on utilise une image
     
     // Carousel d'actualités BCEAO et GIM UEMOA - Synchronisation avec le site officiel
     (function() {
