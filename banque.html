@@ -1874,16 +1874,6 @@
   </style>
 </head>
 <body class="bg-gray-50">
-  <!-- Bouton de présentation séparé -->
-  <div class="fixed top-2 right-4 z-[60]">
-    <a href="presentation.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      <span class="font-semibold">Présentation</span>
-    </a>
-  </div>
-
   <nav class="fixed top-0 w-full z-50 glass-effect-blue shadow-lg">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
       <div class="flex justify-between items-center h-16">
@@ -4400,12 +4390,9 @@
       const goToTutosPageBtn = document.getElementById('goToTutosPageBtn');
       
       if (!videoHolder || !popupModal || !popupVideo) return;
-      
-      // Ouvrir la popup en cliquant sur le holder vidéo
-      videoHolder.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
+
+      // Fonction réutilisable pour ouvrir la popup vidéo principale
+      function openMainVideoPopup() {
         if (window.pauseHeroSlider) {
           window.pauseHeroSlider();
         }
@@ -4431,6 +4418,16 @@
             });
           }
         }, 100);
+      }
+
+      // Rendre la fonction accessible globalement pour d'autres éléments (ex: carte Emefa)
+      window.openMainVideoPopup = openMainVideoPopup;
+      
+      // Ouvrir la popup en cliquant sur le holder vidéo
+      videoHolder.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openMainVideoPopup();
       });
       
       // Fermer la popup
@@ -4620,6 +4617,7 @@
       const heroSection = document.querySelector('.hero-section-edu');
       const emefaCard = document.querySelector('.emefa-hover-card');
       const emefaVideo = document.querySelector('.emefa-video-preview video');
+      const emefaPlayButton = document.querySelector('.emefa-play-button');
       
       if (!heroSection || !emefaCard || !emefaVideo) return;
       
@@ -4660,6 +4658,23 @@
       emefaVideo.addEventListener('loadedmetadata', function() {
         emefaVideo.currentTime = 0;
       });
+
+      // Permettre la lecture de la vidéo complète depuis la carte, sans aller sur la page tutos
+      if (emefaPlayButton) {
+        emefaPlayButton.addEventListener('click', function(e) {
+          // Empêcher la navigation éventuelle (le conteneur est un lien vers tutos-videos.html)
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Ouvrir la même popup vidéo principale que le bloc vidéo plus bas dans la page
+          if (window.openMainVideoPopup && typeof window.openMainVideoPopup === 'function') {
+            window.openMainVideoPopup();
+          } else {
+            // Fallback : si pour une raison quelconque la fonction n'existe pas encore, on redirige vers la page tutos
+            window.location.href = 'tutos-videos.html?video=presentation';
+          }
+        });
+      }
     })();
     
     // Carousel d'actualités BCEAO et GIM UEMOA - Synchronisation avec le site officiel
