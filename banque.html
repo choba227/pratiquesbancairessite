@@ -3368,6 +3368,42 @@
         });
       });
 
+      // Précharger toutes les images de tous les pays en arrière-plan dès le chargement
+      function preloadAllCountryImages() {
+        const allImages = document.querySelectorAll('.unique-ipad .unique-image img');
+        const preloadedUrls = new Set(); // Éviter les doublons
+        
+        allImages.forEach((img, index) => {
+          const src = img.getAttribute('src') || img.getAttribute('data-src');
+          if (!src || preloadedUrls.has(src)) return;
+          
+          preloadedUrls.add(src);
+          
+          // Précharger avec priorité faible pour ne pas bloquer les images visibles
+          const preloadLink = document.createElement('link');
+          preloadLink.rel = 'preload';
+          preloadLink.as = 'image';
+          preloadLink.href = src;
+          preloadLink.setAttribute('fetchpriority', 'low');
+          
+          // Ajouter un petit délai progressif pour ne pas surcharger le réseau
+          setTimeout(() => {
+            document.head.appendChild(preloadLink);
+          }, index * 50); // 50ms entre chaque image pour étaler le chargement
+        });
+        
+        console.log(`Préchargement de ${preloadedUrls.size} images en arrière-plan`);
+      }
+      
+      // Précharger toutes les images après un court délai pour ne pas bloquer le chargement initial
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(preloadAllCountryImages, 1000); // Démarrer après 1 seconde
+        });
+      } else {
+        setTimeout(preloadAllCountryImages, 1000);
+      }
+      
       // Initialiser avec le pays sauvegardé
       const savedCountry = localStorage.getItem(storageKey) || 'all';
       setCountry(savedCountry);
