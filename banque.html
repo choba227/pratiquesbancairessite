@@ -2808,11 +2808,35 @@
   </div>
 
   <script>
-    (function(){
+  (function(){
       let sliderInterval;
       let currentImageIndex = 0;
       let visibleImages = [];
       let isAutoPlay = true;
+      const MAX_ACTIVE_IMAGES = 5;
+
+      // Préparer les images du slider : ne garder chargées que les premières, les autres passent en data-src
+      function prepareSliderImages() {
+        const allImages = Array.from(document.querySelectorAll('.unique-ipad .unique-image img'));
+        if (!allImages.length) return;
+
+        allImages.forEach((img, index) => {
+          // Si l'image a déjà un data-src, on ne refait pas le travail
+          if (img.dataset.src) return;
+
+          const src = img.getAttribute('src');
+          if (!src) return;
+
+          // On garde le src réel uniquement pour les toutes premières images,
+          // les autres seront chargées à la demande quand elles deviennent visibles.
+          if (index < MAX_ACTIVE_IMAGES) {
+            img.dataset.src = src;
+          } else {
+            img.dataset.src = src;
+            img.removeAttribute('src');
+          }
+        });
+      }
       
       function updateVisibleImages() {
         visibleImages = Array.from(document.querySelectorAll('.unique-ipad .unique-image')).filter(img => img.style.display !== 'none');
@@ -2828,10 +2852,17 @@
           img.className = img.className.replace(/unique-image-\d+/g, '');
         });
         
-        // Assigner les positions aux 5 premières images visibles
-        for(let i = 0; i < Math.min(5, visibleImages.length); i++){
+        // Assigner les positions aux MAX_ACTIVE_IMAGES premières images visibles
+        for(let i = 0; i < Math.min(MAX_ACTIVE_IMAGES, visibleImages.length); i++){
           const imageIndex = (currentImageIndex + i) % visibleImages.length;
-          visibleImages[imageIndex].classList.add(`unique-image-${i + 1}`);
+          const imageWrapper = visibleImages[imageIndex];
+          imageWrapper.classList.add(`unique-image-${i + 1}`);
+
+          // Charger réellement l'image seulement lorsqu'elle est dans l'un des slots visibles
+          const img = imageWrapper.querySelector('img');
+          if (img && !img.getAttribute('src') && img.dataset.src) {
+            img.setAttribute('src', img.dataset.src);
+          }
         }
         
         dots.forEach(dot => dot.classList.remove('unique-active'));
@@ -2841,18 +2872,20 @@
       }
       
       function nextSlide() {
+        if (!visibleImages.length) return;
         currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
         updateClasses();
       }
       
       function prevSlide() {
+        if (!visibleImages.length) return;
         currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
         updateClasses();
       }
       
       function startAutoPlay() {
         if (sliderInterval) clearInterval(sliderInterval);
-        if (isAutoPlay) {
+        if (isAutoPlay && visibleImages.length) {
           sliderInterval = setInterval(nextSlide, 5000);
         }
       }
@@ -2862,9 +2895,11 @@
       }
       
       function startSlider() {
+        // Préparer d'abord les images (lazy interne)
+        prepareSliderImages();
         updateVisibleImages();
         currentImageIndex = 0;
-      updateClasses();
+        updateClasses();
         startAutoPlay();
       }
       
