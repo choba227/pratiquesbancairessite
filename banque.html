@@ -4505,15 +4505,22 @@
       });
     })();
     
-    // Diaporama hero section - affichage aléatoire avec transitions fluides
+    // Diaporama hero section - optimisé (5 slides max, moins d'animations, désactivé sur mobile / préférences "réduction des animations")
     (function() {
-      const INTERVAL_DELAY = 7500;
+      const INTERVAL_DELAY = 20000; // 20 secondes entre chaque transition
       let slides = [];
       let order = [];
       let pointer = 0;
       let currentIndex = 0;
       let heroInterval = null;
       let heroInitialized = false;
+
+      // On limite l'animation aux écrans suffisamment larges et aux utilisateurs qui n'ont pas demandé de réduire les animations
+      function heroAnimationEnabled() {
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = window.innerWidth < 1024; // pas d'animation sur mobile / petites tablettes
+        return !prefersReduced && !isSmallScreen;
+      }
       
       const shuffleOrder = () => {
         for (let i = order.length - 1; i > 0; i--) {
@@ -4523,7 +4530,7 @@
       };
       
       function showNextSlide() {
-        if (slides.length === 0) return;
+        if (!heroAnimationEnabled() || slides.length === 0) return;
         
         const previousIndex = currentIndex;
         slides[previousIndex].classList.remove('active');
@@ -4539,7 +4546,7 @@
       }
       
       function startHeroInterval() {
-        if (heroInterval || !heroInitialized) return;
+        if (heroInterval || !heroInitialized || !heroAnimationEnabled()) return;
         heroInterval = setInterval(showNextSlide, INTERVAL_DELAY);
       }
       
@@ -4555,7 +4562,10 @@
       };
       
       window.resumeHeroSlider = function resumeHeroSlider() {
-        startHeroInterval();
+        // On ne relance que si les conditions d'animation sont toujours remplies
+        if (heroAnimationEnabled()) {
+          startHeroInterval();
+        }
       };
       
       function initHeroSlider() {
@@ -4564,19 +4574,38 @@
           console.warn('Aucune slide hero trouvée');
           return;
         }
+        // On limite le diaporama aux 5 premières slides pour alléger le chargement
+        slides = slides.slice(0, 5);
         
         heroInitialized = true;
         order = slides.map((_, index) => index);
         pointer = 0;
         currentIndex = 0;
         
-        shuffleOrder();
-        pointer = 0;
-        currentIndex = order[pointer];
+        // On garde toujours la première image comme visuel principal au chargement
         slides.forEach(slide => slide.classList.remove('active'));
-        slides[currentIndex].classList.add('active');
+        slides[0].classList.add('active');
+        currentIndex = 0;
+        pointer = 0;
+        shuffleOrder();
         
+        // Si les animations sont désactivées (mobile / prefers-reduced-motion), on ne démarre pas le setInterval
         startHeroInterval();
+
+        // Recalibrer au redimensionnement (ex : rotation mobile / resize fenêtre)
+        window.addEventListener('resize', function() {
+          if (!heroInitialized) return;
+          if (!heroAnimationEnabled()) {
+            stopHeroInterval();
+            // On revient sur la première slide pour un affichage statique
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[0].classList.add('active');
+            currentIndex = 0;
+            pointer = 0;
+          } else if (!heroInterval) {
+            startHeroInterval();
+          }
+        });
       }
       
       if (document.readyState === 'loading') {
