@@ -238,6 +238,124 @@
       font-size: 0.45rem;
     }
 
+    /* Styles pour les cartes vidéo et le carrousel de leçons (copié de banque.html) */
+    .video-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+    .lessons-video-swiper {
+      padding: 20px 0 60px 0;
+    }
+    .lessons-video-swiper .swiper-slide {
+      height: auto;
+      display: flex;
+    }
+    .lessons-video-swiper .swiper-slide > * {
+      width: 100%;
+    }
+    .lessons-video-swiper .swiper-button-next,
+    .lessons-video-swiper .swiper-button-prev {
+      color: #3b82f6;
+      background: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    .lessons-video-swiper .swiper-button-next:hover,
+    .lessons-video-swiper .swiper-button-prev:hover {
+      background: #3b82f6;
+      color: white;
+      transform: scale(1.1);
+    }
+    .lessons-video-swiper .swiper-button-next::after,
+    .lessons-video-swiper .swiper-button-prev::after {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .video-thumbnail {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+    }
+    .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+    .play-button:hover {
+      background: rgba(0, 0, 0, 0.85);
+      transform: translate(-50%, -50%) scale(1.15);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+    }
+    .play-button svg {
+      width: 40px;
+      height: 40px;
+      margin-left: 4px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      color: white;
+    }
+    .lesson-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+    }
+    .lesson-badge.lesson-1 {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+    .duration-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
     /* Carte Emefa au survol (copie banque.html) */
     .emefa-hover-card {
       position: absolute;
@@ -549,135 +667,15 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Comptes -->
-          <a href="comptes.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100" data-aos="fade-up">
+          <!-- Tutos vidéos (en premier) -->
+          <a href="tutos-videos.html" class="group bg-slate-900 text-slate-50 rounded-2xl p-6 card-hover border border-slate-800 hover:bg-slate-800 hover:border-blue-400 transition-colors duration-200" data-aos="fade-up">
             <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                </svg>
-              </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-blue-50 text-blue-700">
-                Leçon 1
-              </span>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 text-slate-900">Les Comptes Bancaires</h3>
-            <p class="text-sm text-slate-600 mb-4">
-              Types de comptes, ouverture, fonctionnement, frais et bonnes pratiques pour bien démarrer.
-            </p>
-            <span class="inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-800">
-              Voir la leçon
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </a>
-
-          <!-- Paiements -->
-          <a href="paiements.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100" data-aos="fade-up" data-aos-delay="50">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-emerald-50 text-emerald-700">
-                Leçon 2
-              </span>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 text-slate-900">Les Paiements & Mobile Money</h3>
-            <p class="text-sm text-slate-600 mb-4">
-              Utiliser la carte bancaire, le mobile money, les virements et les transferts en toute sécurité.
-            </p>
-            <span class="inline-flex items-center text-sm font-semibold text-emerald-600 group-hover:text-emerald-800">
-              Voir la leçon
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </a>
-
-          <!-- Crédits -->
-          <a href="credits.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100" data-aos="fade-up" data-aos-delay="100">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-amber-50 text-amber-700">
-                Leçon 3
-              </span>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 text-slate-900">Crédits & Financements</h3>
-            <p class="text-sm text-slate-600 mb-4">
-              Comprendre les crédits, le taux d’intérêt, la capacité de remboursement et les pièges à éviter.
-            </p>
-            <span class="inline-flex items-center text-sm font-semibold text-amber-600 group-hover:text-amber-800">
-              Voir la leçon
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </a>
-
-          <!-- Assurances -->
-          <a href="assurance.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100" data-aos="fade-up">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                </svg>
-              </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-rose-50 text-rose-700">
-                Leçon 4
-              </span>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 text-slate-900">Assurances & Sécurité Financière</h3>
-            <p class="text-sm text-slate-600 mb-4">
-              Assurance vie, santé, auto, habitation : pourquoi et comment bien se couvrir.
-            </p>
-            <span class="inline-flex items-center text-sm font-semibold text-rose-600 group-hover:text-rose-800">
-              Voir la leçon
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </a>
-
-          <!-- Projets de vie -->
-          <a href="projets-de-vie.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100" data-aos="fade-up" data-aos-delay="50">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                </svg>
-              </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-purple-50 text-purple-700">
-                Leçon 5
-              </span>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 text-slate-900">Projets de Vie & Objectifs</h3>
-            <p class="text-sm text-slate-600 mb-4">
-              Études, logement, migration, retraite : construire un plan financier pour vos grands projets.
-            </p>
-            <span class="inline-flex items-center text-sm font-semibold text-purple-600 group-hover:text-purple-800">
-              Voir la leçon
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </a>
-
-          <!-- Tutos vidéos -->
-          <a href="tutos-videos.html" class="group bg-slate-900 text-slate-50 rounded-2xl p-6 card-hover border border-slate-800" data-aos="fade-up" data-aos-delay="100">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-2xl bg-slate-800 flex items-center justify-center text-blue-300">
+              <div class="w-11 h-11 rounded-2xl bg-slate-800 flex items-center justify-center text-blue-300 group-hover:bg-slate-700">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </div>
-              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-slate-800 text-slate-100">
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-slate-800 text-slate-100 group-hover:bg-blue-600">
                 Tutos vidéos
               </span>
             </div>
@@ -692,6 +690,127 @@
               </svg>
             </span>
           </a>
+
+          <!-- Comptes -->
+          <a href="comptes.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100 hover:bg-blue-50/70 hover:border-blue-200 transition-colors duration-200" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-blue-50 text-blue-700">
+                Leçon 1
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-slate-900">Les Comptes Bancaires</h3>
+            <p class="text-sm text-slate-600 mb-4 group-hover:text-slate-800">
+              Types de comptes, ouverture, fonctionnement, frais et bonnes pratiques pour bien démarrer.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-800">
+              Voir la leçon
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Paiements -->
+          <a href="paiements.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100 hover:bg-emerald-50/70 hover:border-emerald-200 transition-colors duration-200" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-emerald-50 text-emerald-700">
+                Leçon 2
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-slate-900">Les Paiements & Mobile Money</h3>
+            <p class="text-sm text-slate-600 mb-4 group-hover:text-slate-800">
+              Utiliser la carte bancaire, le mobile money, les virements et les transferts en toute sécurité.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-emerald-600 group-hover:text-emerald-800">
+              Voir la leçon
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Crédits -->
+          <a href="credits.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100 hover:bg-amber-50/70 hover:border-amber-200 transition-colors duration-200" data-aos="fade-up" data-aos-delay="150">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-amber-50 text-amber-700">
+                Leçon 3
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-slate-900">Crédits & Financements</h3>
+            <p class="text-sm text-slate-600 mb-4 group-hover:text-slate-800">
+              Comprendre les crédits, le taux d’intérêt, la capacité de remboursement et les pièges à éviter.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-amber-600 group-hover:text-amber-800">
+              Voir la leçon
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Assurances -->
+          <a href="assurance.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100 hover:bg-rose-50/70 hover:border-rose-200 transition-colors duration-200" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-rose-50 text-rose-700">
+                Leçon 4
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-slate-900">Assurances & Sécurité Financière</h3>
+            <p class="text-sm text-slate-600 mb-4 group-hover:text-slate-800">
+              Assurance vie, santé, auto, habitation : pourquoi et comment bien se couvrir.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-rose-600 group-hover:text-rose-800">
+              Voir la leçon
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Projets de vie -->
+          <a href="projets-de-vie.html" class="group bg-white rounded-2xl p-6 card-hover border border-slate-100 hover:bg-purple-50/70 hover:border-purple-200 transition-colors duration-200" data-aos="fade-up" data-aos-delay="250">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold rounded-full px-3 py-1 bg-purple-50 text-purple-700">
+                Leçon 5
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-slate-900">Projets de Vie & Objectifs</h3>
+            <p class="text-sm text-slate-600 mb-4 group-hover:text-slate-800">
+              Études, logement, migration, retraite : construire un plan financier pour vos grands projets.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold text-purple-600 group-hover:text-purple-800">
+              Voir la leçon
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+
         </div>
       </div>
     </section>
@@ -863,6 +982,12 @@
       });
       const saved = localStorage.getItem(storageKey) || 'fr';
       setLang(saved);
+
+      // Afficher le sélecteur uniquement une fois initialisé pour éviter tout "sursaut" visuel
+      const wrapper = menu ? menu.closest('.lang-switcher-mini') : null;
+      if (wrapper) {
+        wrapper.style.visibility = 'visible';
+      }
     })();
 
     // Gérer la lecture automatique de la vidéo tutoriel (sans son) dans le holder
@@ -1006,6 +1131,7 @@
     (function() {
       // Données de toutes les leçons
       const lessonsData = [
+        // Leçon 1 : Comptes bancaires (vraies vidéos locales)
         {
           lessonNumber: '1',
           lessonTitle: 'Introduction aux Comptes Bancaires',
@@ -1038,6 +1164,102 @@
           image: 'Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte -Couverture.jpg',
           videoSrc: 'Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte .mp4',
           duration: '6:45'
+        },
+
+        // Leçon 2 : Paiements & Mobile Money (présentation de la leçon, sans vidéo locale encore)
+        {
+          lessonNumber: '2',
+          lessonTitle: 'Services de Paiement',
+          badge: 'lesson-2',
+          badgeText: 'Leçon 2.1',
+          title: 'Utiliser une Carte Bancaire',
+          description: 'Maîtrisez l\'utilisation des cartes bancaires GIM, VISA et Mastercard.',
+          image: 'https://images.unsplash.com/photo-1523287562758-66c7fc58967a?w=800',
+          duration: '8:20'
+        },
+        {
+          lessonNumber: '2',
+          lessonTitle: 'Services de Paiement',
+          badge: 'lesson-2',
+          badgeText: 'Leçon 2.2',
+          title: 'Paiements Mobile Money',
+          description: 'Découvrez comment effectuer des paiements via votre téléphone mobile.',
+          image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=800',
+          duration: '6:30'
+        },
+        {
+          lessonNumber: '2',
+          lessonTitle: 'Services de Paiement',
+          badge: 'lesson-2',
+          badgeText: 'Leçon 2.3',
+          title: 'Effectuer des Transferts',
+          description: 'Apprenez à transférer de l\'argent en toute sécurité entre comptes.',
+          image: 'https://images.unsplash.com/photo-1523287562758-66c7fc58967a?w=800',
+          duration: '9:10'
+        },
+
+        // Leçon 3 : Crédits & Financements (présentation)
+        {
+          lessonNumber: '3',
+          lessonTitle: 'Crédits et Financements',
+          badge: 'lesson-3',
+          badgeText: 'Leçon 3.1',
+          title: 'Comprendre les Crédits',
+          description: 'Tout savoir sur les différents types de crédits disponibles.',
+          image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+          duration: '10:00'
+        },
+        {
+          lessonNumber: '3',
+          lessonTitle: 'Crédits et Financements',
+          badge: 'lesson-3',
+          badgeText: 'Leçon 3.2',
+          title: 'Demander un Crédit',
+          description: 'Guide étape par étape pour faire une demande de crédit.',
+          image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
+          duration: '7:45'
+        },
+        {
+          lessonNumber: '3',
+          lessonTitle: 'Crédits et Financements',
+          badge: 'lesson-3',
+          badgeText: 'Leçon 3.3',
+          title: 'Financement de Projets',
+          description: 'Comment obtenir un financement pour vos projets personnels ou professionnels.',
+          image: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800',
+          duration: '8:50'
+        },
+
+        // Leçon 4 : Assurances (présentation)
+        {
+          lessonNumber: '4',
+          lessonTitle: 'Assurances',
+          badge: 'lesson-4',
+          badgeText: 'Leçon 4.1',
+          title: 'Types d\'Assurances',
+          description: 'Découvrez les différents types d\'assurances disponibles.',
+          image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+          duration: '6:15'
+        },
+        {
+          lessonNumber: '4',
+          lessonTitle: 'Assurances',
+          badge: 'lesson-4',
+          badgeText: 'Leçon 4.2',
+          title: 'Assurance Vie',
+          description: 'Protégez votre famille avec une assurance vie adaptée à vos besoins.',
+          image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800',
+          duration: '7:30'
+        },
+        {
+          lessonNumber: '4',
+          lessonTitle: 'Assurances',
+          badge: 'lesson-4',
+          badgeText: 'Leçon 4.3',
+          title: 'Sécurité Financière',
+          description: 'Apprenez à protéger vos finances et vos biens efficacement.',
+          image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800',
+          duration: '8:00'
         }
       ];
       
