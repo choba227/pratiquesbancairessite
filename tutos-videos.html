@@ -6,8 +6,6 @@
   <title>Tutoriels Vidéo - Pratiques Bancaires</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <style>
     * { font-family: 'Inter', sans-serif; }
     .glass-effect-blue {
@@ -126,6 +124,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 1;
+    }
+    .video-thumbnail img[src=""],
+    .video-thumbnail img:not([src]) {
+      display: none;
     }
     
     /* Styles pour l'intégration Vimeo */
@@ -465,7 +469,7 @@
     <div class="tutos-hero-slide tutos-hero-slide-7"></div>
 
     <div class="tutos-hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center text-white" data-aos="fade-up">
+      <div class="text-center text-white"fade-up">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-2xl">Tutoriels Vidéo</h1>
         <p class="text-xl md:text-2xl max-w-3xl mx-auto text-white/90 drop-shadow-lg">Apprenez les services bancaires étape par étape avec nos tutoriels vidéo</p>
       </div>
@@ -474,7 +478,7 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Section Présentation Emefa -->
-    <section class="mb-20" data-aos="fade-up">
+    <section class="mb-20"fade-up">
       <div class="text-center mb-8">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">
           <span class="text-gradient">Présentation de votre Formatrice</span>
@@ -492,8 +496,10 @@
               class="absolute top-0 left-0 w-full h-full"
               style="object-fit: contain;"
               preload="metadata"
-              controls
               playsinline
+              poster="Sources%20Image/EMEFA/Assise en pagne (2)_resultat.webp"
+              controlsList="nodownload nofullscreen noremoteplayback"
+              disablePictureInPicture
             >
               <source src="Sources%20Image/EMEFA/Tutos Léçon/Présentation/Présentation Emefa.mp4" type="video/mp4">
               Votre navigateur ne supporte pas la lecture de vidéos.
@@ -513,9 +519,9 @@
             
             <!-- Barre de contrôles personnalisée -->
             <div id="videoControls" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 opacity-0 hover:opacity-100 transition-opacity duration-300 z-30">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-4 pointer-events-auto">
                 <!-- Play/Pause -->
-                <button id="controlsPlayPause" class="text-white hover:text-blue-400 transition-colors" aria-label="Play/Pause">
+                <button id="controlsPlayPause" class="text-white hover:text-blue-400 transition-colors pointer-events-auto" aria-label="Play/Pause">
                   <svg id="controlsPlayIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
@@ -526,7 +532,7 @@
                 
                 <!-- Barre de progression -->
                 <div class="flex-1 relative">
-                                    <input 
+                  <input 
                     type="range" 
                     id="progressBar" 
                     min="0"
@@ -541,25 +547,37 @@
                 <!-- Temps -->
                 <span id="timeDisplay" class="text-white text-sm font-mono min-w-[100px]">0:00 / 0:00</span>
                 
-                <!-- Mute/Unmute -->
-                <button id="muteBtn" class="text-white hover:text-blue-400 transition-colors" aria-label="Mute/Unmute">
-                  <svg id="volumeIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                  </svg>
-                  <svg id="mutedIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-                  </svg>
-                </button>
+                <!-- Contrôle de volume -->
+                <div class="flex items-center space-x-2 group/volume">
+                  <button id="muteBtn" class="text-white hover:text-blue-400 transition-colors pointer-events-auto" aria-label="Mute/Unmute">
+                    <svg id="volumeIcon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                    <svg id="mutedIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                  </button>
+                  <input 
+                    type="range" 
+                    id="volumeBar" 
+                    min="0"
+                    max="100"
+                    value="100"
+                    aria-label="Volume"
+                    class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+                    style="background: linear-gradient(to right, #3b82f6 0%, #3b82f6 100%, #4b5563 100%, #4b5563 100%);"
+                  >
+                </div>
                 
                 <!-- Popup -->
-                <button id="popupBtn" class="text-white hover:text-blue-400 transition-colors" aria-label="Ouvrir en popup">
+                <button id="popupBtn" class="text-white hover:text-blue-400 transition-colors pointer-events-auto" aria-label="Ouvrir en popup">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                   </svg>
                 </button>
                 
                 <!-- Plein écran -->
-                <button id="fullscreenBtn" class="text-white hover:text-blue-400 transition-colors" aria-label="Plein écran">
+                <button id="fullscreenBtn" class="text-white hover:text-blue-400 transition-colors pointer-events-auto" aria-label="Plein écran">
                   <svg id="fullscreenIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                   </svg>
@@ -654,16 +672,50 @@
           >
             Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
+          
+          <!-- Overlay fin de vidéo avec proposition de vidéo suivante -->
+          <div id="tutoEndVideoOverlay" class="absolute inset-0 bg-black bg-opacity-90 hidden flex flex-col items-center justify-center z-20">
+            <div class="text-center px-6 py-8 bg-white/10 backdrop-blur-md rounded-2xl max-w-md mx-auto">
+              <h3 class="text-3xl font-bold text-white mb-6">Vidéo terminée</h3>
+              <p class="text-white/80 mb-8">Que souhaitez-vous faire ?</p>
+              
+              <div class="flex flex-col gap-4">
+                <!-- Bouton Rejouer -->
+                <button id="tutoReplayBtn" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                  </svg>
+                  Rejouer la vidéo
+                </button>
+                
+                <!-- Bouton Vidéo suivante -->
+                <button id="tutoNextVideoBtn" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 hidden">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <span id="tutoNextVideoText">Vidéo suivante</span>
+                </button>
+                
+                <!-- Bouton Fermer -->
+                <button id="tutoCloseEndOverlayBtn" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <section id="lecon-1" class="mb-20" data-aos="fade-up">
+    <section id="lecon-1" class="mb-20"fade-up">
       <h2 class="section-title text-gradient mb-8">Leçon 1 : Introduction aux Comptes Bancaires</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="video-card tuto-video-card-clickable" data-video-src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d'un compte bancaire.mp4" style="cursor: pointer;">
           <div class="video-thumbnail">
-            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d'un compte bancaire -Couverture_resultat.jpg" alt="Définition et Utilité" loading="lazy">
+            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d'un compte bancaire -Couverture_resultat.webp" alt="Définition et Utilité" loading="lazy" onerror="this.onerror=null; this.src='Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d\'un compte bancaire -Couverture.jpg';">
             <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="duration-badge">5:30</div>
           </div>
@@ -678,7 +730,7 @@
         </div>
         <div class="video-card tuto-video-card-clickable" data-video-src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 2/Chapitre 2 Types de Comptes Bancaires.mp4" style="cursor: pointer;">
           <div class="video-thumbnail">
-            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 2/Chapitre 2 Types de Comptes Bancaires-Couverture_resultat.jpg" alt="Les Différents Types de Comptes" loading="lazy">
+            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 2/Chapitre 2 Types de Comptes Bancaires-Couverture_resultat.webp" alt="Les Différents Types de Comptes" loading="lazy" onerror="this.onerror=null; this.src='Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 2/Chapitre 2 Types de Comptes Bancaires-Couverture.jpg';">
             <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="duration-badge">7:15</div>
           </div>
@@ -693,7 +745,7 @@
         </div>
         <div class="video-card tuto-video-card-clickable" data-video-src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte .mp4" style="cursor: pointer;">
           <div class="video-thumbnail">
-            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte -Couverture_resultat.jpg" alt="Comment Créer un Compte" loading="lazy">
+            <img src="Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte -Couverture_resultat.webp" alt="Comment Créer un Compte" loading="lazy" onerror="this.onerror=null; this.src='Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte -Couverture.jpg';">
             <div class="play-button"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="duration-badge">6:45</div>
           </div>
@@ -709,7 +761,7 @@
       </div>
     </section>
 
-    <section id="paiements" class="mb-20" data-aos="fade-up" data-aos-delay="100">
+    <section id="paiements" class="mb-20"fade-up" data-aos-delay="100">
       <h2 class="section-title text-gradient mb-8">Leçon 2 : Services de Paiement</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="video-card tuto-video-card-clickable" style="cursor: pointer;">
@@ -761,7 +813,7 @@
       </div>
     </section>
 
-    <section class="mb-20" data-aos="fade-up" data-aos-delay="200">
+    <section class="mb-20"fade-up" data-aos-delay="200">
       <h2 class="section-title text-gradient mb-8">Leçon 3 : Crédits et Financements</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="video-card">
@@ -812,7 +864,7 @@
       </div>
     </section>
 
-    <section class="mb-20" data-aos="fade-up" data-aos-delay="300">
+    <section class="mb-20"fade-up" data-aos-delay="300">
       <h2 class="section-title text-gradient mb-8">Leçon 4 : Assurances</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="video-card">
@@ -873,7 +925,8 @@
   <script>
     // AOS allégé
     document.addEventListener('DOMContentLoaded', function () {
-      if (window.AOS && typeof AOS.init === 'function') {
+      // AOS supprimé pour améliorer les performances
+      if (false && window.AOS && typeof AOS.init === 'function') {
         AOS.init({ duration: 500, once: true, offset: 80, easing: 'ease-out' });
       }
     });
@@ -999,8 +1052,6 @@
     video.addEventListener('ended', () => {
       updatePlayPauseIcons();
       endVideoOverlay.classList.remove('hidden');
-      // Masquer les contrôles natifs
-      video.controls = false;
     });
 
     video.addEventListener('volumechange', updateVolumeIcons);
@@ -1033,11 +1084,35 @@
       document.getElementById('progressTooltip').classList.add('hidden');
     });
 
-    // Mute/Unmute
+    // Contrôle de volume
+    const volumeBar = document.getElementById('volumeBar');
+    
     muteBtn.addEventListener('click', () => {
-      video.muted = !video.muted;
+      if (video.muted) {
+        video.muted = false;
+        if (volumeBar) {
+          volumeBar.value = video.volume * 100;
+        }
+      } else {
+        video.muted = true;
+      }
       updateVolumeIcons();
     });
+    
+    if (volumeBar) {
+      volumeBar.addEventListener('input', (e) => {
+        video.volume = e.target.value / 100;
+        video.muted = video.volume === 0;
+        updateVolumeIcons();
+        volumeBar.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${e.target.value}%, #4b5563 ${e.target.value}%, #4b5563 100%)`;
+      });
+      
+      // Initialiser le volume
+      video.addEventListener('loadedmetadata', () => {
+        volumeBar.value = video.volume * 100;
+        volumeBar.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${video.volume * 100}%, #4b5563 ${video.volume * 100}%, #4b5563 100%)`;
+      });
+    }
 
     // Plein écran
     fullscreenBtn.addEventListener('click', () => {
@@ -1088,30 +1163,54 @@
     // Overlay fin de vidéo
     replayBtn.addEventListener('click', () => {
       endVideoOverlay.classList.add('hidden');
-      video.controls = true;
       video.currentTime = 0;
       video.play();
     });
 
     continueBtn.addEventListener('click', () => {
       endVideoOverlay.classList.add('hidden');
-      video.controls = true;
       // Scroll vers les leçons
-      document.querySelector('section[data-aos="fade-up"]:nth-of-type(2)').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      const nextSection = document.querySelector('#lecon-1');
+      if (nextSection) {
+        nextSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     });
 
     // Afficher les contrôles au survol
     const videoContainer = video.closest('.relative');
-    videoContainer.addEventListener('mouseenter', () => {
-      videoControls.style.opacity = '1';
+    if (videoContainer && videoControls) {
+      videoContainer.addEventListener('mouseenter', () => {
+        videoControls.style.opacity = '1';
+      });
+      videoContainer.addEventListener('mouseleave', () => {
+        if (!video.paused) {
+          videoControls.style.opacity = '0';
+        }
+      });
+    }
+    
+    // S'assurer que les contrôles natifs sont toujours désactivés
+    video.controls = false;
+    video.setAttribute('controls', 'false');
+    video.removeAttribute('controls');
+    
+    // Désactiver le plein écran natif sur iOS/Safari
+    if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen = function() {};
+    }
+    
+    // Empêcher l'affichage des contrôles natifs
+    video.addEventListener('loadedmetadata', () => {
+      video.controls = false;
     });
-    videoContainer.addEventListener('mouseleave', () => {
-      if (!video.paused) {
-        videoControls.style.opacity = '0';
-      }
+    
+    // Empêcher le double-clic qui active le plein écran natif
+    video.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
     });
 
     // Clic sur la vidéo pour play/pause
@@ -1146,10 +1245,71 @@
       const tutoPopupModal = document.getElementById('tutoVideoPopupModal');
       const tutoVideoPlayer = document.getElementById('tutoVideoPlayer');
       const closeTutoPopupBtn = document.getElementById('closeTutoVideoPopupBtn');
+      const tutoEndVideoOverlay = document.getElementById('tutoEndVideoOverlay');
+      const tutoReplayBtn = document.getElementById('tutoReplayBtn');
+      const tutoNextVideoBtn = document.getElementById('tutoNextVideoBtn');
+      const tutoNextVideoText = document.getElementById('tutoNextVideoText');
+      const tutoCloseEndOverlayBtn = document.getElementById('tutoCloseEndOverlayBtn');
+      
+      // Structure de données des vidéos par leçon
+      const lessonsVideos = {
+        'lecon-1': [
+          {
+            src: 'Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 1/Chapitre 1 Définition et Utilité d\'un compte bancaire.mp4',
+            title: 'Chapitre 1 : Définition et Utilité'
+          },
+          {
+            src: 'Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 2/Chapitre 2 Types de Comptes Bancaires.mp4',
+            title: 'Chapitre 2 : Les Différents Types de Comptes'
+          },
+          {
+            src: 'Sources%20Image/EMEFA/Tutos Léçon/Leçon 1 Les comptes Bancaires/Chapitre 3/Chapitre 3 Comment crée un compte .mp4',
+            title: 'Chapitre 3 : Comment Créer un Compte'
+          }
+        ]
+      };
+      
+      let currentVideoSrc = null;
+      
+      // Fonction pour trouver la vidéo suivante
+      function findNextVideo(currentSrc) {
+        if (!currentSrc) return null;
+        
+        // Chercher dans toutes les leçons
+        for (const lessonId in lessonsVideos) {
+          const videos = lessonsVideos[lessonId];
+          const currentIndex = videos.findIndex(v => v.src === currentSrc);
+          
+          if (currentIndex !== -1) {
+            // Si ce n'est pas la dernière vidéo de la leçon
+            if (currentIndex < videos.length - 1) {
+              return videos[currentIndex + 1];
+            }
+            // Sinon, chercher dans la leçon suivante
+            const lessonKeys = Object.keys(lessonsVideos);
+            const currentLessonIndex = lessonKeys.indexOf(lessonId);
+            if (currentLessonIndex < lessonKeys.length - 1) {
+              const nextLessonId = lessonKeys[currentLessonIndex + 1];
+              if (lessonsVideos[nextLessonId] && lessonsVideos[nextLessonId].length > 0) {
+                return lessonsVideos[nextLessonId][0];
+              }
+            }
+          }
+        }
+        return null;
+      }
       
       // Fonction pour ouvrir la popup vidéo
       function openTutoVideoPopup(videoSrc) {
         if (!tutoPopupModal || !tutoVideoPlayer) return;
+        
+        currentVideoSrc = videoSrc;
+        
+        // Masquer l'overlay de fin si visible (forcer la fermeture)
+        if (tutoEndVideoOverlay) {
+          tutoEndVideoOverlay.classList.add('hidden');
+          tutoEndVideoOverlay.style.display = 'none';
+        }
         
         // Charger et jouer la vidéo
         tutoVideoPlayer.src = videoSrc;
@@ -1157,6 +1317,14 @@
         tutoPopupModal.classList.remove('hidden');
         tutoPopupModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        
+        // S'assurer que l'overlay reste fermé après le chargement
+        setTimeout(() => {
+          if (tutoEndVideoOverlay) {
+            tutoEndVideoOverlay.classList.add('hidden');
+            tutoEndVideoOverlay.style.display = 'none';
+          }
+        }, 100);
         
         // Jouer automatiquement
         tutoVideoPlayer.play().catch(err => {
@@ -1184,6 +1352,10 @@
       if (tutoPopupModal) {
         tutoPopupModal.addEventListener('click', function(e) {
           if (e.target === tutoPopupModal) {
+            if (tutoEndVideoOverlay && !tutoEndVideoOverlay.classList.contains('hidden')) {
+              // Si l'overlay de fin est visible, ne pas fermer la popup
+              return;
+            }
             closeTutoVideoPopup();
           }
         });
@@ -1192,9 +1364,77 @@
       // Fermer avec la touche Escape
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && tutoPopupModal && !tutoPopupModal.classList.contains('hidden')) {
-          closeTutoVideoPopup();
+          if (tutoEndVideoOverlay && !tutoEndVideoOverlay.classList.contains('hidden')) {
+            // Si l'overlay de fin est visible, le fermer d'abord
+            tutoEndVideoOverlay.classList.add('hidden');
+          } else {
+            closeTutoVideoPopup();
+          }
         }
       });
+      
+      // Détecter la fin de la vidéo
+      if (tutoVideoPlayer) {
+        tutoVideoPlayer.addEventListener('ended', function() {
+          if (tutoEndVideoOverlay) {
+            tutoEndVideoOverlay.classList.remove('hidden');
+            tutoEndVideoOverlay.style.display = 'flex';
+            
+            // Vérifier s'il y a une vidéo suivante
+            const nextVideo = findNextVideo(currentVideoSrc);
+            if (nextVideo && tutoNextVideoBtn && tutoNextVideoText) {
+              tutoNextVideoBtn.classList.remove('hidden');
+              tutoNextVideoText.textContent = nextVideo.title;
+            } else {
+              if (tutoNextVideoBtn) {
+                tutoNextVideoBtn.classList.add('hidden');
+              }
+            }
+          }
+        });
+      }
+      
+      // Bouton Rejouer
+      if (tutoReplayBtn) {
+        tutoReplayBtn.addEventListener('click', function() {
+          if (tutoEndVideoOverlay) {
+            tutoEndVideoOverlay.classList.add('hidden');
+          }
+          if (tutoVideoPlayer && currentVideoSrc) {
+            tutoVideoPlayer.currentTime = 0;
+            tutoVideoPlayer.play().catch(err => console.log('Relecture échouée:', err));
+          }
+        });
+      }
+      
+      // Bouton Vidéo suivante
+      if (tutoNextVideoBtn) {
+        tutoNextVideoBtn.addEventListener('click', function() {
+          const nextVideo = findNextVideo(currentVideoSrc);
+          if (nextVideo) {
+            // Fermer l'overlay immédiatement et de manière forcée
+            if (tutoEndVideoOverlay) {
+              tutoEndVideoOverlay.classList.add('hidden');
+              tutoEndVideoOverlay.style.display = 'none';
+            }
+            // Petit délai pour s'assurer que l'overlay est bien fermé
+            setTimeout(() => {
+              // Ouvrir la nouvelle vidéo
+              openTutoVideoPopup(nextVideo.src);
+            }, 50);
+          }
+        });
+      }
+      
+      // Bouton Fermer l'overlay
+      if (tutoCloseEndOverlayBtn) {
+        tutoCloseEndOverlayBtn.addEventListener('click', function() {
+          if (tutoEndVideoOverlay) {
+            tutoEndVideoOverlay.classList.add('hidden');
+          }
+          closeTutoVideoPopup();
+        });
+      }
       
       // Gestion des clics sur les cartes vidéo cliquables
       document.addEventListener('click', function(e) {
@@ -1219,6 +1459,39 @@
             openTutoVideoPopup(videoSrc);
           }
         }
+      });
+    })();
+
+    // Gestion des erreurs de chargement d'images pour les thumbnails
+    (function() {
+      document.addEventListener('DOMContentLoaded', function() {
+        const thumbnailImages = document.querySelectorAll('.video-thumbnail img');
+        thumbnailImages.forEach(img => {
+          // Vérifier si l'image existe
+          if (!img.src || img.src === window.location.href) {
+            img.style.display = 'none';
+            return;
+          }
+          
+          // Gestionnaire d'erreur pour les images qui ne se chargent pas
+          img.addEventListener('error', function() {
+            this.style.display = 'none';
+            // Le fond dégradé du .video-thumbnail sera visible
+          });
+          
+          // Marquer l'image comme chargée si elle se charge correctement
+          img.addEventListener('load', function() {
+            this.style.opacity = '1';
+          });
+          
+          // Vérifier si l'image est déjà chargée
+          if (img.complete && img.naturalHeight !== 0) {
+            img.style.opacity = '1';
+          } else {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease';
+          }
+        });
       });
     })();
 

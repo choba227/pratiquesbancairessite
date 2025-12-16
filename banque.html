@@ -8,8 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <!-- Préchargement des premières images du slider iPad (Togo par défaut) -->
   <link rel="preload" as="image" href="AFFICHES%20BANQUE%20PAYS/TOGO/Orabank_resultat.webp" fetchpriority="high">
   <link rel="preload" as="image" href="AFFICHES%20BANQUE%20PAYS/TOGO/BDM_resultat.webp" fetchpriority="high">
@@ -29,40 +27,6 @@
       border-bottom: 1px solid rgba(59, 130, 246, 0.2);
     }
     
-    /* Animations modernes */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
-    }
-    
-    @keyframes fluid-gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    .float-animation {
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    .pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-    
-    /* Animated Gradient Cards */
-    [class*="bg-gradient-to-br"] {
-      background-size: 200% 200%;
-      animation: fluid-gradient 8s ease infinite;
-    }
-    
-    [class*="bg-gradient-to-br"]:hover {
-      animation: fluid-gradient 8s ease infinite, pulse-glow 2s ease-in-out infinite;
-    }
     
     .glass-effect {
       background: rgba(255, 255, 255, 0.1);
@@ -72,12 +36,21 @@
     }
     
     .card-hover {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: box-shadow 0.2s ease;
     }
     
     .card-hover:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Les country-btn gardent leurs animations spécifiques */
+    .country-btn.card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .country-btn.card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
     .text-gradient {
@@ -309,6 +282,9 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
     }
+    .country-btn.active * {
+      color: white !important;
+    }
     .country-btn.active img {
       transform: scale(1.1);
       border-color: white;
@@ -317,6 +293,9 @@
     .country-btn.active .text-xs {
       color: white;
       font-weight: 600;
+    }
+    .country-btn.active span {
+      color: white !important;
     }
     .country-btn img {
       transition: all 0.3s ease;
@@ -1994,7 +1973,7 @@
     <!-- Country Selection -->
     <section id="pays" class="bg-gradient-to-br from-gray-50 to-white py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-12"fade-up">
           <h2 class="text-4xl md:text-5xl font-bold mb-6">
             <span class="text-gradient">Sélectionnez votre pays</span>
           </h2>
@@ -2004,7 +1983,7 @@
         </div>
         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4 sm:gap-6 max-w-6xl mx-auto">
           <!-- Tous les pays -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="all" data-aos="fade-up" data-aos-delay="100">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="all"fade-up" data-aos-delay="100">
             <div class="flex flex-col items-center">
               <div class="h-12 w-12 rounded-full mb-3 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg">
                 <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2016,7 +1995,7 @@
           </button>
           
           <!-- Bénin -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="benin" data-aos="fade-up" data-aos-delay="200">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="benin"fade-up" data-aos-delay="200">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/bj.png" alt="Bénin" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Bénin</span>
@@ -2024,7 +2003,7 @@
           </button>
           
           <!-- Burkina Faso -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="burkina-faso" data-aos="fade-up" data-aos-delay="300">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="burkina-faso"fade-up" data-aos-delay="300">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/bf.png" alt="Burkina Faso" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Burkina Faso</span>
@@ -2032,7 +2011,7 @@
           </button>
           
           <!-- Côte d'Ivoire -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="cote-divoire" data-aos="fade-up" data-aos-delay="400">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="cote-divoire"fade-up" data-aos-delay="400">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/ci.png" alt="Côte d'Ivoire" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Côte d'Ivoire</span>
@@ -2040,7 +2019,7 @@
           </button>
           
           <!-- Guinée Bissau -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="guinee-bissau" data-aos="fade-up" data-aos-delay="500">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="guinee-bissau"fade-up" data-aos-delay="500">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/gw.png" alt="Guinée Bissau" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Guinée Bissau</span>
@@ -2048,7 +2027,7 @@
           </button>
           
           <!-- Mali -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="mali" data-aos="fade-up" data-aos-delay="600">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="mali"fade-up" data-aos-delay="600">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/ml.png" alt="Mali" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Mali</span>
@@ -2056,7 +2035,7 @@
           </button>
           
           <!-- Niger -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="niger" data-aos="fade-up" data-aos-delay="700">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="niger"fade-up" data-aos-delay="700">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/ne.png" alt="Niger" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Niger</span>
@@ -2064,7 +2043,7 @@
           </button>
           
           <!-- Sénégal -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="senegal" data-aos="fade-up" data-aos-delay="800">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="senegal"fade-up" data-aos-delay="800">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/sn.png" alt="Sénégal" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Sénégal</span>
@@ -2072,7 +2051,7 @@
           </button>
           
           <!-- Togo -->
-          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="togo" data-aos="fade-up" data-aos-delay="900">
+          <button class="country-btn card-hover glass-effect rounded-2xl p-4 transition-all duration-300" data-country="togo"fade-up" data-aos-delay="900">
             <div class="flex flex-col items-center">
               <img src="https://flagcdn.com/w40/tg.png" alt="Togo" class="h-12 w-12 object-cover rounded-full mb-3 shadow-lg">
               <span class="text-sm font-semibold text-gray-700">Togo</span>
@@ -2086,7 +2065,7 @@
 <section id="repertoire" class="bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Titre du Répertoire des Banques -->
-    <div class="text-center mb-8" data-aos="fade-up">
+    <div class="text-center mb-8"fade-up">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">
         <span class="text-gradient" id="bankDirectoryTitle">Répertoire des Banques</span>
       </h2>
@@ -2439,12 +2418,12 @@
   <!-- Carousel d'actualités BCEAO et GIM UEMOA -->
   <section id="actualites" class="news-carousel-container">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="news-carousel-title" data-aos="fade-up">
+      <div class="news-carousel-title"fade-up">
         <h2>Actualités BCEAO & GIM UEMOA</h2>
         <p>Restez informé des dernières nouveautés bancaires et financières</p>
       </div>
       
-      <div class="swiper news-swiper" id="newsSwiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper news-swiper" id="newsSwiper"fade-up" data-aos-delay="100">
         <div class="swiper-wrapper">
           <!-- Les cartes seront générées dynamiquement par JavaScript -->
         </div>
@@ -4085,6 +4064,10 @@
           // Configuration exacte Popcarte
           on: {
             init: function() {
+              // Démarrer l'autoplay explicitement
+              if (this.autoplay) {
+                this.autoplay.start();
+              }
               const swiperEl = this.el;
               swiperEl.addEventListener('mouseenter', () => {
                 this.autoplay.stop();
@@ -4125,7 +4108,8 @@
     })();
     
     // Initialize AOS (allégé pour de meilleures performances)
-    if (window.AOS && typeof AOS.init === 'function') {
+    // AOS supprimé pour améliorer les performances
+    if (false && window.AOS && typeof AOS.init === 'function') {
       AOS.init({
         duration: 500,   // animations plus courtes
         once: true,      // une seule fois par élément
@@ -4906,7 +4890,7 @@
         const nextEl = swiperContainer.querySelector('.swiper-button-next');
         const prevEl = swiperContainer.querySelector('.swiper-button-prev');
         
-        new Swiper(swiperContainer, {
+        const newsSwiper = new Swiper(swiperContainer, {
           slidesPerView: 1,
           spaceBetween: 24,
           loop: true,
@@ -4928,6 +4912,14 @@
             },
             1280: {
               slidesPerView: 4,
+            }
+          },
+          on: {
+            init: function() {
+              // Démarrer l'autoplay explicitement
+              if (this.autoplay) {
+                this.autoplay.start();
+              }
             }
           }
         });
@@ -5280,8 +5272,10 @@
               }
             },
             init: function() {
-              // Démarrer l'autoplay immédiatement
-              this.autoplay.start();
+              // Démarrer l'autoplay explicitement
+              if (this.autoplay) {
+                this.autoplay.start();
+              }
             }
           }
         });

@@ -6,8 +6,6 @@
   <title>Pratiques Bancaires - Plateforme Bancaire UEMOA</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <link rel="preload" as="image" href="AFFICHES%20BANQUE%20PAYS/alimenter/quiz-show-host-holding-cards-with-questions-ready-ask-contestants_resultat.webp">
@@ -70,47 +68,6 @@
       letter-spacing: -0.02em;
     }
     
-    /* Fluid Animations */
-    @keyframes fluid-float {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      33% { transform: translateY(-10px) translateX(5px); }
-      66% { transform: translateY(5px) translateX(-5px); }
-    }
-    
-    @keyframes fluid-pulse {
-      0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
-        transform: scale(1);
-      }
-      50% { 
-        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-        transform: scale(1.05);
-      }
-    }
-    
-    @keyframes fluid-gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    .float-animation {
-      animation: fluid-float 8s ease-in-out infinite;
-    }
-    
-    .pulse-glow {
-      animation: fluid-pulse 2s ease-in-out infinite;
-    }
-    
-    /* Animated Gradient Cards */
-    [class*="bg-gradient-to-br"] {
-      background-size: 200% 200%;
-      animation: fluid-gradient 8s ease infinite;
-    }
-    
-    [class*="bg-gradient-to-br"]:hover {
-      animation: fluid-gradient 8s ease infinite, fluid-pulse 2s ease-in-out infinite;
-    }
     
     /* Fluid Glass Effect */
     .glass-effect {
@@ -123,12 +80,10 @@
     
     /* Fluid Cards - Enhanced Glassmorphism */
     .card-hover {
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      will-change: transform;
+      transition: box-shadow 0.2s ease;
     }
     
     .card-hover:hover {
-      transform: translateY(-12px) scale(1.02);
       box-shadow: var(--fluid-shadow-2xl);
     }
     
@@ -142,30 +97,14 @@
       font-weight: 600;
       font-size: 15px;
       letter-spacing: 0.01em;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: box-shadow 0.2s ease;
       position: relative;
       overflow: hidden;
       box-shadow: var(--fluid-shadow-lg);
     }
     
-    .cta-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    
     .cta-button:hover {
-      transform: translateY(-3px) scale(1.02);
       box-shadow: var(--fluid-shadow-2xl);
-    }
-    
-    .cta-button:hover::before {
-      left: 100%;
     }
     
     /* Fluid Background Grid */
@@ -184,31 +123,14 @@
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       box-shadow: var(--fluid-shadow-lg);
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: box-shadow 0.2s ease;
       border: 1px solid rgba(99, 102, 241, 0.1);
       overflow: hidden;
     }
     
-    .pro-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--fluid-primary), var(--fluid-secondary), var(--fluid-accent));
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    
     .pro-card:hover {
-      transform: translateY(-8px);
       box-shadow: var(--fluid-shadow-2xl);
       border-color: rgba(99, 102, 241, 0.3);
-    }
-    
-    .pro-card:hover::before {
-      opacity: 1;
     }
     
     /* Cartes "Nos Leçons" redesignées et cliquables */
@@ -303,28 +225,7 @@
       box-shadow: var(--fluid-shadow-lg);
     }
     
-    /* Fluid Brand Animation */
-    @keyframes fluid-brand {
-      0%, 100% { 
-        transform: translateY(0) rotate(0deg);
-        color: var(--fluid-primary);
-      }
-      25% { 
-        transform: translateY(-2px) rotate(1deg);
-        color: var(--fluid-secondary);
-      }
-      50% { 
-        transform: translateY(-4px) rotate(0deg);
-        color: var(--fluid-accent);
-      }
-      75% { 
-        transform: translateY(-2px) rotate(-1deg);
-        color: var(--fluid-secondary);
-      }
-    }
-    
     .animated-brand {
-      animation: fluid-brand 4s ease-in-out infinite;
       font-weight: 800;
     }
     
@@ -448,7 +349,6 @@
     }
     
     .pagination li.active::before {
-      animation: fluid-pulse 2s ease-in-out infinite;
     }
     
     .pagination .hover-text {
@@ -529,7 +429,6 @@
       height: 500px;
       background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
       border-radius: 50%;
-      animation: fluid-float 12s ease-in-out infinite reverse;
       z-index: 1;
     }
     
@@ -553,24 +452,7 @@
       hyphens: auto;
     }
     
-    /* Animation continue pour le texte à gauche */
-    @keyframes slide-up-fade {
-      0% {
-        opacity: 0.7;
-        transform: translateY(10px);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0.7;
-        transform: translateY(-10px);
-      }
-    }
-    
     .hero-text-animated {
-      animation: slide-up-fade 3s ease-in-out infinite;
     }
     
     @media (max-width: 768px) {
@@ -857,19 +739,8 @@
       display: flex;
       opacity: 1;
       background: rgba(0, 0, 0, 0.95);
-      animation: fadeIn 0.3s ease forwards;
     }
     
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        background: rgba(0, 0, 0, 0);
-      }
-      to {
-        opacity: 1;
-        background: rgba(0, 0, 0, 0.95);
-      }
-    }
     
     .news-modal-content {
       position: relative;
@@ -882,26 +753,12 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
-      transform: scale(0.8) translateY(50px);
       opacity: 0;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+      transition: opacity 0.2s ease;
     }
     
     #newsModal.active .news-modal-content {
-      transform: scale(1) translateY(0);
       opacity: 1;
-      animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-    
-    @keyframes modalSlideIn {
-      from {
-        transform: scale(0.8) translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
     }
     
     .news-modal-image {
@@ -1393,7 +1250,7 @@
   <!-- Hero Section -->
   <section id="intro" class="relative py-32 md:py-40 pt-40 md:pt-48 overflow-hidden min-h-[80vh] flex items-start">
     <div class="w-full pt-32 md:pt-40">
-      <div class="flex flex-col items-start gap-12" data-aos="fade-up">
+      <div class="flex flex-col items-start gap-12">
         <!-- Texte à gauche -->
         <div class="w-full pl-4 sm:pl-6 lg:pl-12 text-left -mt-32 md:-mt-40 lg:-mt-64">
           <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-0 leading-relaxed text-white drop-shadow-2xl hero-text-animated">
@@ -1420,19 +1277,19 @@
   <section id="stats" class="py-16 bg-white bg-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="text-center"100">
           <div class="stats-counter">8</div>
           <p class="text-lg text-gray-500 mt-2">Pays UEMOA</p>
         </div>
-        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-center"200">
           <div class="stats-counter">50+</div>
           <p class="text-lg text-gray-500 mt-2">Banques Partenaires</p>
         </div>
-        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+        <div class="text-center"300">
           <div class="stats-counter">100K+</div>
           <p class="text-lg text-gray-500 mt-2">Utilisateurs Actifs</p>
         </div>
-        <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="text-center"400">
           <div class="stats-counter">24h / 7j</div>
           <p class="text-lg text-gray-500 mt-2">Support Disponible</p>
         </div>
@@ -1443,7 +1300,7 @@
   <!-- Services Section -->
   <section id="services" class="py-16 bg-gray-50 bg-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
+      <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
           <span class="text-gradient">Nos Leçons</span>
         </h2>
@@ -1454,7 +1311,7 @@
       
       <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-12">
         <a href="comptes.html" class="lesson-link" aria-label="Découvrir la leçon Les Comptes">
-          <div class="pro-card lesson-card comptes p-14 card-hover" data-aos="fade-up" data-aos-delay="100">
+          <div class="pro-card lesson-card comptes p-14 card-hover"100">
             <div class="icon-ring mb-6">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
@@ -1494,7 +1351,7 @@
         </a>
         
         <a href="paiements.html" class="lesson-link" aria-label="Découvrir la leçon Les Paiements">
-        <div class="pro-card lesson-card paiements p-14 card-hover" data-aos="fade-up" data-aos-delay="200">
+        <div class="pro-card lesson-card paiements p-14 card-hover"200">
           <div class="icon-ring mb-6">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
@@ -1534,7 +1391,7 @@
         </a>
         
         <a href="credits.html" class="lesson-link" aria-label="Découvrir la leçon Les Crédits">
-        <div class="pro-card lesson-card credits p-14 card-hover" data-aos="fade-up" data-aos-delay="300">
+        <div class="pro-card lesson-card credits p-14 card-hover"300">
           <div class="icon-ring mb-6">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -1574,7 +1431,7 @@
         </a>
         
         <a href="assurance.html" class="lesson-link" aria-label="Découvrir la leçon Les Assurances">
-        <div class="pro-card lesson-card assurances p-14 card-hover" data-aos="fade-up" data-aos-delay="400">
+        <div class="pro-card lesson-card assurances p-14 card-hover"400">
           <div class="icon-ring mb-6">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -1614,7 +1471,7 @@
         </a>
         
         <a href="projets-de-vie.html" class="lesson-link" aria-label="Découvrir la leçon Projets de Vie">
-        <div class="pro-card lesson-card projets p-14 card-hover" data-aos="fade-up" data-aos-delay="500">
+        <div class="pro-card lesson-card projets p-14 card-hover"500">
           <div class="icon-ring mb-6">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -1654,7 +1511,7 @@
         </a>
         
         <a href="banque.html" class="lesson-link" aria-label="Découvrir la leçon Éducation Financière">
-        <div class="pro-card lesson-card education p-14 card-hover" data-aos="fade-up" data-aos-delay="600">
+        <div class="pro-card lesson-card education p-14 card-hover"600">
           <div class="icon-ring mb-6">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -1699,7 +1556,7 @@
   <!-- Timeline Section -->
   <section class="py-20 bg-gray-50"> <!-- Passage en design clair -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
+      <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
           <span class="text-gradient">Notre Mission</span>
         </h2>
@@ -1709,7 +1566,7 @@
       </div>
       
       <div class="space-y-12">
-        <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+        <div class="timeline-item"100">
           <h3 class="text-3xl font-bold mb-4">Éducation & Information</h3>
           <p class="text-xl text-blue-900 mb-4">
             Nous vulgarisons les concepts bancaires complexes pour les rendre accessibles à tous les citoyens de l'espace UEMOA.
@@ -1721,7 +1578,7 @@
           </div>
         </div>
         
-        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+        <div class="timeline-item"200">
           <h3 class="text-3xl font-bold mb-4">Transparence & Confiance</h3>
           <p class="text-xl text-blue-900 mb-4">
             Nous promouvons la transparence dans les services financiers et aidons les utilisateurs à faire des choix éclairés.
@@ -1733,7 +1590,7 @@
           </div>
         </div>
         
-        <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+        <div class="timeline-item"300">
           <h3 class="text-3xl font-bold mb-4">Innovation & Accessibilité</h3>
           <p class="text-xl text-blue-900 mb-4">
             Nous intégrons les dernières technologies pour rendre les services financiers plus accessibles et intuitifs.
@@ -1745,7 +1602,7 @@
           </div>
         </div>
         
-        <div class="timeline-item" data-aos="fade-right" data-aos-delay="400">
+        <div class="timeline-item"400">
           <h3 class="text-3xl font-bold mb-4">Qui Sommes-Nous ?</h3>
           <p class="text-xl text-blue-900 mb-4">
             Pratiques Bancaires est une plateforme éducative dédiée à l'éducation financière et à la bancarisation dans l'espace UEMOA. Nous accompagnons les citoyens dans la maîtrise des services bancaires, du mobile money, des crédits et des assurances, en rendant l'information financière accessible et compréhensible pour tous.
@@ -1758,7 +1615,7 @@
   <!-- Testimonials Section -->
   <section class="py-20 bg-white"> <!-- Passage en design clair -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
+      <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
           <span class="text-gradient">Témoignages</span>
         </h2>
@@ -1768,7 +1625,7 @@
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-12">
-        <div class="testimonial-card p-12" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card p-12"100">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
               A
@@ -1786,7 +1643,7 @@
           </div>
         </div>
         
-        <div class="testimonial-card p-12" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card p-12"200">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
               K
@@ -1804,7 +1661,7 @@
           </div>
         </div>
         
-        <div class="testimonial-card p-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="testimonial-card p-12"300">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
               F
@@ -1828,7 +1685,7 @@
   <!-- CTA Section -->
   <section class="py-20 bg-blue-50 relative"> <!-- Passage en design clair -->
     <div class="relative z-10 max-w-4xl mx-auto text-center px-4">
-      <div data-aos="fade-up">
+      <div>
         <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
           Prêt à Découvrir l'Univers Bancaire UEMOA ?
         </h2>
@@ -1836,7 +1693,7 @@
           Rejoignez des milliers d'utilisateurs qui ont déjà transformé leur relation avec les services financiers
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="banque.html" class="cta-button pulse-glow text-xl md:text-2xl px-8 md:px-12 py-5 md:py-6">
+          <a href="banque.html" class="cta-button text-xl md:text-2xl px-8 md:px-12 py-5 md:py-6">
             Commencer Maintenant
           </a>
         </div>
@@ -1847,12 +1704,12 @@
   <!-- Carousel d'actualités BCEAO et GIM UEMOA -->
   <section class="news-carousel-container">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="news-carousel-title" data-aos="fade-up">
+      <div class="news-carousel-title">
         <h2>Actualités BCEAO & GIM UEMOA</h2>
         <p>Restez informé des dernières nouveautés bancaires et financières</p>
       </div>
       
-      <div class="swiper news-swiper" id="newsSwiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper news-swiper" id="newsSwiper"100">
         <div class="swiper-wrapper">
           <!-- Les cartes seront générées dynamiquement par JavaScript -->
         </div>
@@ -1949,14 +1806,6 @@
   <script>
     // AOS allégé
     document.addEventListener('DOMContentLoaded', function () {
-      if (window.AOS && typeof AOS.init === 'function') {
-        AOS.init({
-          duration: 500,
-          once: true,
-          offset: 80,
-          easing: 'ease-out'
-        });
-      }
     });
     
     // Smooth scrolling for navigation links
